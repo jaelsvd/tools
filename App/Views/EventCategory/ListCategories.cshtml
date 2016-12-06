@@ -1,0 +1,60 @@
+﻿@model IEnumerable<App.Entities.EventCategory>
+
+@{
+    ViewBag.Title = "ListCategories";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+
+<!-- Main section-->
+<section>
+    <!-- Page content-->
+    <div class="content-wrapper">
+        <div class="content-heading">
+            Listado de Categorías de Evento
+            <small data-localize="eventCategory.WELCOME"></small>
+        </div>
+        <div class="row">
+            <!-- Article Content-->
+            <div class="col-md-6 col-sm-6">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <p>
+                                    @Html.ActionLink("Crear Categoría de Evento", "CreateEvent","Event")
+                                </p>
+                                <table class="display grid-data" cellspacing="0" width="100%">
+                                    <thead>
+                                        <tr>
+                                            <td>
+                                                Categoría
+                                            </td>
+                                            <td align="right">
+                                                Acciones
+                                            </td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model)
+                                        {
+                                            <tr>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Name)
+                                                </td>
+                                                <td align="right">
+                                                    @Html.ActionLink("Editar", "UpdateCategory", new { id = item.Id }) |
+                                                    <a class="link" data-target="#myModal" style="cursor:pointer;" data-toggle="modal" eventCategory-id="@item.Id" m-title="Delete Event Category" isdelete="1" onclick="addDeleteUrlEventCategory(this);">Eliminar</a> 
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

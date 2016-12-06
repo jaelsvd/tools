@@ -1,0 +1,56 @@
+﻿@model App.Entities.EventCategory
+
+@{
+    ViewBag.Title = "UpdateCategory";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+
+<!-- Main section-->
+<section>
+    <!-- Page content-->
+    <div class="content-wrapper">
+        <div class="content-heading">
+            Crear Categoría de Evento
+            <small data-localize="eventCategory.WELCOME"></small>
+        </div>
+
+        <div class="row">
+            <!-- Article Content-->
+            <div class="col-md-6 col-sm-6">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+
+                        @using (Html.BeginForm("EditCategory", "EventCategory", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                        {
+                            @Html.AntiForgeryToken()
+
+                            <div class="form-horizontal">
+                                <p class="lead">Modificar Categoría de Evento</p>
+                                <hr />
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                @Html.HiddenFor(model => model.Id)
+
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "mb-lg form-control input-lg" } })
+                                        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-md-offset-8 col-md-8">
+                                        <input type="submit" value="Guardar Cambios" class="btn btn-info" />
+                                    </div>
+                                </div>
+                            </div>
+                        }                       
+                    </div>
+                    <div class="panel-footer">
+                        @Html.ActionLink("Regresar a la lista", "ListCategories")
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

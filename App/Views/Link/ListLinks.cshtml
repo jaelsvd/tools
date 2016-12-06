@@ -1,0 +1,76 @@
+﻿
+<script>
+    initModal();
+</script>
+@model IEnumerable<App.Entities.Link>
+
+@{
+    ViewBag.Title = "Listado de Links";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+<section>
+    <!-- Page content-->
+    <div class="content-wrapper">
+        <div class="content-heading">
+            Listado de Links
+        </div>
+        <div class="row">
+            <!-- Article Content-->
+            <div class="col-lg-9">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <button type="button" class="btn btn-oval btn-default">@Html.ActionLink("Crear Nuevo Link", "CreateLink", "Link")</button>
+                    </div>
+                    <div class="panel-body">         
+                        <table class="display grid-data" cellspacing="0" width="100%">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        Nombre
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Description)
+                                    </th>
+                                    <th>
+                                        URL
+                                    </th>
+                                    <th>
+                                        Es Frecuente
+                                    </th>
+                                    <th>
+                                        Acciones
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                @foreach (var item in Model)
+            {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Name)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Description)
+                                        </td>                                        
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.AccessLink)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.IsFrequent)
+                                        </td>
+                                        <td>
+                                            @Html.ActionLink("Editar", "UpdateLink", new { id = item.Id }) |
+                                            <a class="link" data-target="#myModal" style="cursor:pointer;" data-toggle="modal" link-id="@item.Id" m-title="Delete Link" isdelete="1" onclick="addDeleteUrl(this); ">Eliminar</a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

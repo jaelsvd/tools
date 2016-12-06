@@ -1,0 +1,62 @@
+﻿@model IEnumerable<App.Entities.Policy>
+
+@{
+    ViewBag.Title = "Lista de Políticas";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+<!-- Main section-->
+<section>
+    <!-- Page content-->
+    <div class="content-wrapper">
+        <div class="content-heading">
+            Lista de Normas y Procesos
+        </div>
+        <div class="row">
+            <!-- Article Content-->
+              <div class="col-lg-9">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <button type="button" class="btn btn-oval btn-default">@Html.ActionLink("Crear Nueva Norma y Proceso", "CreatePolicy", "Policy")</button>
+                    </div>
+                    <div class="panel-body">
+                        <table class="display grid-data" cellpadding="0" width="100%">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Title)
+                                    </th>
+
+                                    <th>
+                                        Fecha
+                                    </th>
+                                    <th>
+                                        Acciones
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Title)
+                                        </td>
+
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Date)
+                                        </td>
+                                        <td>
+                                            @Html.ActionLink("Editar", "UpdatePolicy", new { id = item.Id }) |
+                                            <a class="link" data-target="#myModal" style="cursor:pointer;" data-toggle="modal" policy-id="@item.Id" m-title="Delete Policy" isdelete="1" onclick="addDeleteUrlPolicy(this);">Eliminar</a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+</section>

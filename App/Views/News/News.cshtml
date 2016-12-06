@@ -1,0 +1,74 @@
+﻿@using PagedList.Mvc;
+@using PagedList;
+@model PagedList<App.Entities.News>
+@{
+    ViewBag.Title = "News";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+    <section>
+        <!-- Page content-->
+        <div class="content-wrapper">   
+            <div class="unwrap">
+                <div style="background-image: url('https://wallpaperscraft.com/image/field_dawn_sky_beautiful_scenery_87654_2560x1440.jpg')" class="bg-cover">
+                    <div class="p-xl text-center text-white">
+                        <h2 class="m0">Noticias</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="row">
+                        <hr />
+                        @foreach (var item in Model)
+                        {
+                            <div class="col-lg-4">
+                                <div class="col-lg-12">
+                                    <div class="panel">
+                                        <div class="item" style="height:200px;">
+                                            <a href="@Url.Action("View","News",new {id = item.Id})"> <img src="@Html.Raw(item.ImagePath)@Html.Raw(item.ImageName)" class="img-responsive " /></a>
+                                        </div>
+                                        <div class="panel-body">
+                                            <p class="clearfix">
+                                                <span class="pull-left">
+                                                    <small class="mr-sm">
+                                                        by <a href="">@item.CreateBy</a>
+                                                    </small>
+                                                    <small class="mr-sm">
+                                                        @Html.Raw(string.Format("{0:dd/MMM/yyyy}", item.CreateDate))
+                                                    </small>
+                                                </span>
+                                            </p>
+                                            <div class="caption">
+                                                <h4>
+                                                    <a href="@Url.Action("View","News",new {id = item.Id})">
+                                                        @item.Title
+                                                    </a>
+                                                </h4>
+                                            </div>
+
+                                            <div class="pull-right">
+                                                <em><a href="@Url.Action("View","News",new {id = item.Id})">Ver mas...</a></em>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                    <div class="col-sm-10">
+                        <div class="center-block">
+                            @Html.PagedListPager(Model,page=>Url.Action("News", new{ page, pageSize=Model.PageSize}))
+                            Mostrando @Model.FirstItemOnPage a @Model.LastItemOnPage de @Model.TotalItemCount Noticias
+                        </div>
+                    </div>
+                </div>
+             </div>
+         </div>
+</section>
+
+
+
+
+
+
+

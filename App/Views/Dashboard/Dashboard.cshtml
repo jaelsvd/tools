@@ -1,0 +1,308 @@
+﻿@model App.ViewModels.DashboardViewModel
+@{
+    ViewBag.Title = "Dashboard";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+    var count = 1; 
+}
+
+<!-- Main section-->
+<section>
+    <!-- Page content-->
+    <div class="content-wrapper">
+        <!-- START Dashboard-->
+        <div class="row">
+            <div class="col-md-8 col-sm-4">
+                <!-- START Carrousel-->
+                @if(Model.News.Any())
+                { 
+                <div class="row">
+                    <div class="col-md-12">
+                        <div id="carousel-example-captions" data-ride="carousel" class="carousel slide">
+                            <ol class="carousel-indicators">
+                                @for (var i = 0; i < Model.News.Count; i++)
+                                {
+                                    <li data-target="#carousel-example-captions" data-slide-to="@Html.Raw(i)" class="@(i==0 ? "active" : "")"></li>
+                                }
+                            </ol>
+                            <div role="listbox" class="carousel-inner">
+                                @foreach (var item in Model.News)
+                                {
+
+                                    <div class="item @(count == 1 ? "active" : "")" style="height:250px;">
+                                        <a href="@Url.Action("View","News",new {id = item.Id})">
+                                            <img class="img-responsive center-block" src="@Html.Raw(item.ImagePath)@Html.Raw(item.ImageName)" style="width:100%;" alt="@Html.Raw(item.Title)">
+                                            <div class="carousel-caption">
+
+                                                <h3>@Html.Raw(item.Title)</h3>                                              
+                                            </div>
+                                        </a>
+                                    </div>
+                                    count++;
+                                }
+                            </div>
+                            <a href="#carousel-example-captions" role="button" data-slide="prev" class="left carousel-control">
+                                <span aria-hidden="true" class="glyphicon glyphicon-chevron-left"></span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                            <a href="#carousel-example-captions" role="button" data-slide="next" class="right carousel-control">
+                                <span aria-hidden="true" class="glyphicon glyphicon-chevron-right"></span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        </div>
+                        
+                    </div>
+                </div> 
+                }                        
+                <!-- START Eventos-->
+                @if (Model.Events.Any())
+                {
+                <div class="row">
+                    <div class="col-md-12 col-sm-12">
+                        <hr />
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <p class="lead">Próximos eventos</p>
+                                <hr />
+                                <!-- START list group-->
+                                <div class="list-group">
+                                    <!-- START Multiple List group-->
+                                    @foreach (var item in Model.Events)
+                                    {
+                                        <div class="list-group">
+                                            <a href="@Url.Action("EventDetail","Event",new {id = item.Id})" class="list-group-item">
+                                                <table class="wd-wide">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td class="wd-xs">
+                                                                <div class="ph">
+                                                                    <img class="img-responsive center-block" src="@Html.Raw(item.ImagePath)@Html.Raw(item.ImageName)" alt="">
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <div class="ph">
+                                                                    <h4 class="media-box-heading">@Html.Raw(item.Title)</h4>
+                                                                    @if (item.Body.Length > 50)
+                                                                    {
+                                                                        @Html.Raw(item.Body.Substring(0, 50))
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        @Html.Raw(item.Body)
+                                                                    }                                                                  
+                                                                </div>
+                                                            </td>
+                                                            <td class="wd-sm hidden-xs hidden-sm">
+                                                                <div class="ph">
+                                                                    <p class="m0">@Html.Raw(string.Format("{0:dd/MMM/yyyy}", item.EventDate)) </p>
+                                                                    <small class="text-muted">Fecha</small>
+                                                                </div>
+                                                            </td>
+                                                            <td class="wd-sm">
+                                                                <div class="ph">
+                                                                    <progressbar value="80" type="success" class="m0 progress-xs">@Html.Raw(Math.Round((item.EventDate - DateTime.Now).TotalDays)) dias para el evento</progressbar>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </a>
+                                        </div>
+                                    }                                   
+                                </div>
+                            </div>
+                            <div class="panel-footer clearfix">
+                                    <button type="button" class="btn btn-oval btn-default">@Html.ActionLink("Ver todos los eventos", "Events", "Event")</button>
+                            </div>
+                            </div>
+                    </div>
+                        
+                    </div>
+                }
+                             
+            </div>
+            <!-- END carousel-->
+            <div class="col-md-4 col-sm-4">
+                @if (Model.NextCarWash == null)
+                { }
+                else
+                { 
+                <div class="row">
+                    <div class="col-md-12">
+                        <!-- START widget-->
+                        <div class="panel widget">
+                            <div class="row row-table row-flush">
+                                <div class="col-xs-4 bg-danger text-center">
+                                    <em class="fa fa-car fa-2x"></em>
+                                </div>
+                                <div class="col-xs-8">
+                                    <div class="panel-body text-center">
+                                        <h4 class="mt0">@Html.Raw(string.Format("{0:dddd d MMMM}", Model.NextCarWash))</h4>
+                                        <p class="mb0 text-muted">Pr&oacute;ximo lavado</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END widget-->
+                </div>
+                }
+                    <!--START Links-->
+                @if(Model.Links.Any())
+                { 
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12">
+                                <div class="panel panel-purple">
+                                    <div class="panel-heading">Accesos Directos</div>
+                                    @foreach (var item in Model.Links)
+                                    {
+                                        <div class="list-group-item">
+                                            <div class="media-box">
+                                                <div class="pull-left">                                              
+                                                    <span class="fa-stack">
+                                                        <img class="img-responsive center-block" src="@Html.Raw(item.ImagePath)@Html.Raw(item.ImageName)" alt="">
+                                                        
+                                                    </span>
+                                                </div>
+                                                <div class="media-box-body clearfix">
+                                                    <small class="text-muted pull-right ml">@Html.Raw(item.Description)</small>
+                                                    <div class="media-box-heading">
+                                                        <a href="@item.AccessLink" target="_blank" class="text-purple m0">@Html.Raw(item.Name)</a>
+                                                        
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                              </div>
+                        </div>
+                    </div>
+                }
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="calendar-app">
+                            <div class="row">
+
+                                <div class="col-lg-12">
+                                    <!-- START panel-->
+                                    <div class="panel panel-default">
+                                        <div class="panel-body">
+                                            <!-- START calendar-->
+                                            <div id="calendar"></div>
+                                            <!-- END calendar-->
+                                        </div>
+                                    </div>
+                                    <!-- END panel-->
+                                </div>
+                            </div>
+                            <!-- END row-->
+                        </div>
+                    </div>
+                </div>
+                @if(Model.PayrollSlip.Receipts.Perceptions.Any() || Model.PayrollSlip.Receipts.Deductions.Any())
+                { 
+                <!-- PayRoll START-->
+                  <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <p class="lead">Resumen de Persepciones</p>
+                              
+                                <div class="panel-body">
+                                    <!-- START table-responsive-->
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Concepto</th>
+                                                    <th>Monto</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var item in Model.PayrollSlip.Receipts.Perceptions)
+                                                {
+                                                    <tr>
+                                                        <td>@Html.Raw(item.Concept)</td>
+                                                        <td><label class="label label-success">@Html.Raw(string.Format("{0:c}", item.Amount))</label></td>
+                                                    </tr>
+                                                }
+                                                @foreach (var item in Model.PayrollSlip.Receipts.Deductions)
+                                                {
+                                                    <tr>
+                                                        <td>@Html.Raw(item.Concept)</td>
+                                                        <td><label class="label label-danger">@Html.Raw(string.Format("{0:c}", item.Amount))</label></td>
+                                                    </tr>
+                                                }
+                                                
+                                            </tbody>
+                                        </table>
+                                        <br />
+                                    <div class="table-responsive table-bordered">
+                                        <table class="table">
+                                            <tbody>
+                                                <tr>
+                                                    <th style="text-align:right;">Total de Percepciones</th>
+                                                    <td><label class="label label-success">@Html.Raw(string.Format("{0:c}", Model.PayrollSlip.Receipts.PerceptionsTotal))</label></td>
+                                                </tr>
+                                                <tr>
+                                                    <th style="text-align:right;">Total de Deducciones</th>
+                                                    <td><label class="label label-danger">@Html.Raw(string.Format("{0:c}", Model.PayrollSlip.Receipts.DeductionsTotal))</label></td>
+                                                </tr>
+                                                <tr>
+                                                    <th style="text-align:right;">Total Depositado</th>
+                                                    <td><label class="label label-success">@Html.Raw(string.Format("{0:c}", Model.PayrollSlip.Receipts.TotalDeposited))</label></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                        <div class="row">
+                                            <div class="col-md-12 text-center">
+                                                <hr />
+                                                <p>Periodo del <label class="label label-info"> @Html.Raw(string.Format("{0:dd/MMM/yyyy}", Model.PayrollSlip.Receipts.StartDate))</label> al <label class="label label-purple">@Html.Raw(string.Format("{0:dd/MMM/yyyy}", Model.PayrollSlip.Receipts.FinishDate))</label></p>
+                                                
+                                            </div>
+                                        </div>
+                                    <!-- END table-responsive-->
+                                </div>
+                            </div>
+                         </div>
+                    </div>
+                    <!-- START events-->
+
+                </div>
+                }
+            </div>
+        <!-- START panel-->
+        
+        </div>
+        <!-- START panel-->
+        
+    </div>
+</section>
+@Scripts.Render("~/vendor/jquery-ui/ui/core.js")
+@Scripts.Render("~/vendor/jquery-ui/ui/widget.js")
+@Scripts.Render("~/vendor/jquery-ui/ui/mouse.js")
+@Scripts.Render("~/vendor/jquery-ui/ui/draggable.js")
+@Scripts.Render("~/vendor/jquery-ui/ui/droppable.js")
+@Scripts.Render("~/vendor/jquery-ui/ui/sortable.js")
+@Scripts.Render("~/vendor/jqueryui-touch-punch/jquery.ui.touch-punch.min.js")
+<!-- MOMENT JS-->
+@Scripts.Render("~/vendor/moment/min/moment-with-locales.min.js")
+<!-- FULLCALENDAR-->
+@Scripts.Render("~/vendor/fullcalendar/dist/fullcalendar.min.js")
+@Scripts.Render("~/vendor/fullcalendar/dist/gcal.js")
+<script>
+   $(document).ready(function() {
+
+      $('#calendar').fullCalendar({
+         header: {
+            left: 'prev,next today',
+            center: 'title',
+            right: 'month,agendaWeek,agendaDay'
+         },
+         editable: false,
+         eventLimit: true, // allow "more" link when too many events
+         events: @Html.Raw(Json.Encode(Model.Calendar)),
+      });
+
+   });
+</script>
+

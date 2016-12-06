@@ -1,0 +1,297 @@
+﻿<!DOCTYPE html>
+<html lang="eS">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>@ViewBag.Title</title>
+    <!-- =============== VENDOR STYLES ===============-->
+    <!-- FONT AWESOME-->
+    @Styles.Render("~/vendor/fontawesome/css/font-awesome.min.css")
+    <!-- SIMPLE LINE ICONS-->
+    @Styles.Render("~/vendor/simple-line-icons/css/simple-line-icons.css")
+    <!-- ANIMATE.CSS-->
+    @Styles.Render("~/vendor/animate.css/animate.min.css")
+    <!-- WHIRL (spinners)-->
+    @Styles.Render("~/vendor/whirl/dist/whirl.css")
+    <!-- =============== BOOTSTRAP STYLES ===============-->
+    @Styles.Render("~/Content/bootstrap.css")
+    <!-- =============== PAGE VENDOR STYLES ===============-->
+    <!-- WEATHER ICONS-->
+    @Styles.Render("~/vendor/weather-icons/css/weather-icons.min.css")
+    <!-- CHOSEN-->
+    @Styles.Render("~/vendor/chosen_v1.2.0/chosen.min.css")
+    <!-- =============== APP STYLES ===============-->
+    @Styles.Render("~/Content/app.css")
+    <!-- FULLCALENDAR-->
+    @Styles.Render("~/vendor/fullcalendar/dist/fullcalendar.css")
+    <!-- =============== SITE  ===============-->
+    @Styles.Render("~/Content/jquery.dataTables.min.css")
+    <!-- =============== JQCLOUD ===============-->
+    @Styles.Render("~/vendor/jqcloud2/dist/jqcloud.css")
+    <!-- =============== CSS ===============-->
+    @Styles.Render("~/Content/Site.css")
+    <!-- =============== JQUERY-TEXT ===============-->
+    @Styles.Render("~/Content/jquery-te-1.4.0.css")
+
+
+
+
+    <!-- =============== VENDOR SCRIPTS ===============-->
+    <!-- JQUERY-->
+    @Scripts.Render("~/vendor/jquery/dist/jquery.js")
+    <!-- MODERNIZR-->
+    @Scripts.Render("~/vendor/modernizr/modernizr.custom.js")
+    <!-- MATCHMEDIA POLYFILL-->
+    @Scripts.Render("~/vendor/matchMedia/matchMedia.js")
+    <!-- JQUERY-->
+    @Scripts.Render("~/vendor/jquery/dist/jquery.js")
+    @Scripts.Render("~/Scripts/jquery-2.2.1.js")
+    @Scripts.Render("~/vendor/jquery-classyloader/js/jquery.classyloader.min.js ")
+    <!-- =============== JQCLOUD ===============-->
+    @Scripts.Render("~/vendor/jqcloud2/dist/jqcloud.js")
+
+    <!-- BOOTSTRAP-->
+    @*@Scripts.Render("~/Scripts/bootstrap.js")*@
+    @Scripts.Render("~/vendor/bootstrap/dist/js/bootstrap.js")
+    @Scripts.Render("~/Scripts/jquery-2.2.1.js")
+    @Scripts.Render("~/vendor/jquery-classyloader/js/jquery.classyloader.min.js ")
+    <!-- STORAGE API-->
+    @Scripts.Render("~/vendor/jQuery-Storage-API/jquery.storageapi.js")
+    <!-- JQUERY EASING-->
+    @Scripts.Render("~/vendor/jquery.easing/js/jquery.easing.js")
+    <!-- FLOT-->
+    @Scripts.Render("~/vendor/flot/jquery.flot.js")
+    @Scripts.Render("~/vendor/flot/jquery.flot.resize.js")
+    @Scripts.Render("~/vendor/flot-spline/js/jquery.flot.spline.min.js")
+    <!-- ANIMO-->
+    @Scripts.Render("~/vendor/animo.js/animo.js")
+    <!-- SLIMSCROLL-->
+    @Scripts.Render("~/vendor/slimScroll/jquery.slimscroll.min.js")
+    <!-- SCREENFULL-->
+    @Scripts.Render("~/vendor/screenfull/dist/screenfull.js")
+    <!-- LOCALIZE-->
+    @Scripts.Render("~/vendor/jquery-localize-i18n/dist/jquery.localize.js")
+    <!-- =============== APP SCRIPTS ===============-->
+    @*<script>
+        $('.chose-select').chosen();
+        $('.wysiwyg').wysiwyg();
+    </script>*@
+
+    @Scripts.Render("~/vendor/chosen_v1.2.0/chosen.jquery.min.js")
+
+    <!-- Site.js-->
+    @Scripts.Render("~/Scripts/Site.js")
+    @Scripts.Render("~/Scripts/jquery.validate.js")
+    @Scripts.Render("~/Scripts/jquery-1.12.0.min.js")
+    @Scripts.Render("~/Scripts/jquery.dataTables.min.js")
+    @Scripts.Render("~/Scripts/jquery-te-1.4.0.min.js")
+    @RenderSection("scripts", required: false)
+
+    <!-- =============== PAGE VENDOR SCRIPTS ===============-->
+    <!-- SPARKLINE-->
+    <script src="../vendor/sparkline/index.js"></script>
+    <!-- FLOT CHART-->
+    @*<script src="../vendor/Flot/jquery.flot.js"></script>
+    <script src="../vendor/flot.tooltip/js/jquery.flot.tooltip.min.js"></script>
+    <script src="../vendor/Flot/jquery.flot.resize.js"></script>
+    <script src="../vendor/Flot/jquery.flot.pie.js"></script>
+    <script src="../vendor/Flot/jquery.flot.time.js"></script>
+    <script src="../vendor/Flot/jquery.flot.categories.js"></script>
+    <script src="../vendor/flot-spline/js/jquery.flot.spline.min.js"></script>*@
+    <!-- CLASSY LOADER-->
+    <script src="../vendor/jquery-classyloader/js/jquery.classyloader.min.js"></script>
+    <!-- MOMENT JS-->
+    <script src="../vendor/moment/min/moment-with-locales.min.js"></script>
+    <!-- DEMO-->
+    @*<script src="js/demo/demo-flot.js"></script>*@
+
+</head>
+
+<body>
+    <div class="wrapper">
+        <!-- top navbar-->
+        <header class="topnavbar-wrapper">
+            <!-- START Top Navbar-->
+            <nav role="navigation" class="navbar topnavbar">
+                <!-- START navbar header-->
+                <div class="navbar-header">
+                    <a href="#/" class="navbar-brand">
+                        <div class="brand-logo">
+                            <img src="~/Images/mindWhite.png" width="85px" alt="App Logo" class="img-responsive">
+                        </div>
+                        <div class="brand-logo-collapsed">
+                            <img src="~/Images/MindHubLogo.png" alt="App Logo" class="img-responsive">
+                        </div>
+                    </a>
+                </div>
+                <!-- END navbar header-->
+                <!-- START Nav wrapper-->
+                <div class="nav-wrapper">
+                    <!-- START Left navbar-->
+                    <ul class="nav navbar-nav">
+                        <li>
+                            <!-- Button used to collapse the left sidebar. Only visible on tablet and desktops-->
+                            <a href="#" data-trigger-resize="" data-toggle-state="aside-collapsed" class="hidden-xs">
+                                <em class="fa fa-navicon"></em>
+                            </a>
+                            <!-- END User avatar toggle-->
+                            <!-- END lock screen-->
+                    </ul>
+                    <!-- END Left navbar-->
+                    <!-- START Right Navbar-->
+                    @*@if (ViewBag.User != null)
+                        {*@
+                    <ul class="nav navbar-nav navbar-right">
+                        <!-- Fullscreen (only desktops)-->
+                        <li class="visible-lg">
+                            <a href="#" data-toggle-fullscreen="">
+                                <em class="fa fa-expand"></em>
+                            </a>
+                        </li>
+                        <!-- START Alert menu-->
+                        @*}*@
+                        <!-- END Dropdown menu-->
+                        <li>
+                            <a href="@Url.Action("Logout", "Login")">
+                                <small>Cerrar Sesión </small>
+                                <em class="icon-logout"></em>
+                            </a>
+                        </li>
+                        <!-- END Alert menu-->
+                        <!-- END Offsidebar menu-->
+                    </ul>
+
+                    <!-- END Right Navbar-->
+                </div>
+                <!-- END Nav wrapper-->
+            </nav>
+            <!-- END Top Navbar-->
+        </header>
+        <!-- sidebar-->
+        <aside class="aside">
+            <!-- START Sidebar (left)-->
+            <div class="aside-inner">
+                <nav data-sidebar-anyclick-close="" class="sidebar">
+                    <!-- START sidebar nav-->
+                    <ul class="nav">
+                        <!-- START user info-->
+                        <li class="has-user-block">
+                            <div id="user-block" class="collapse">
+                                <div class="item user-block">
+                                    <!-- User picture-->
+                                    <div class="user-block-picture">
+                                        <div class="user-block-status">
+                                            <img src="img/user/02.jpg" alt="Avatar" width="60" height="60" class="img-thumbnail img-circle">
+                                            <div class="circle circle-success circle-lg"></div>
+                                        </div>
+                                    </div>
+                                    <!-- Name and Job-->
+                                    <div class="user-block-info">
+                                        <span class="user-block-name">Hello, Dude</span>
+                                        <span class="user-block-role">Role</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <!-- END user info-->
+                        <!-- Iterates over all sidebar items-->
+                        <li class="nav-heading ">
+                            <span data-localize="sidebar.heading.HEADER">Menu de Navegación</span>
+                        </li>
+                        <li class=" ">
+                            <a href="@Url.Action("Index","Dashboard")" " title="Layouts">
+                                <em class="icon-chart"></em>
+                                <span>Dashboard</span>
+                            </a>
+                        </li>
+                        <li class=" ">
+                            <a href="@Url.Action("Index","News")" title="News">
+                                <em class="icon-book-open"></em>
+                                <span>Noticias</span>
+                            </a>
+                        </li>
+                        <li class=" ">
+                            <a href="@Url.Action("Directory", "Directory")" title="Layouts">
+                                <em class="icon-notebook"></em>
+                                <span>Directorio</span>
+                            </a>
+                        </li>
+                        <li class=" ">
+                            <a href="@Url.Action("Index", "Event")" title="Layouts">
+                                <em class="icon-game-controller"></em>
+                                <span>Eventos</span>
+                            </a>
+                        </li>
+                        <li class=" ">
+                            <a href="@Url.Action("Index", "Link")" title="Layouts">
+                                <em class="icon-link"></em>
+                                <span>Links</span>
+                            </a>
+                        </li>
+                        <li class=" ">
+                            <a href="@Url.Action("Index", "Benefit")" title="Layouts">
+                                <em class="icon-emotsmile"></em>
+                                <span>Beneficios</span>
+                            </a>
+                        </li>
+                        <li class=" ">
+                            <a href="@Url.Action("Index", "Policy")" title="Layouts">
+                                <em class="icon-people"></em>
+                                <span>Normas y Procesos</span>
+                            </a>
+                        </li>
+                    </ul>
+                    <!-- END sidebar nav-->
+                </nav>
+            </div>
+            <!-- END Sidebar (left)-->
+        </aside>
+
+
+
+        @RenderBody()
+
+
+
+
+
+        <!-- Page footer-->
+        <footer>
+                <span>&copy; 2016 - BootCamp</span>
+            </footer>
+    </div>
+
+        @using (Html.BeginForm("", "Link", FormMethod.Post, new { id = "deleteForm", @class = "form-horizontal", role = "form" }))
+        {
+            @Html.AntiForgeryToken()
+
+
+    <!-- Modal -->
+            <div id="myModal" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 id="m-title" class="modal-title">Borrar Elemento</h4>
+                        </div>
+
+                        <div class="modal-body">
+                            <p>Seguro que quiere borrar este elemento?</p>
+                        </div>
+                        <div class="modal-footer">
+                            <!--<button type="button" class="btn btn-primary" >Ok</button>-->
+                            <button type="submit" class="btn btn-primary">Aceptar</button>
+                            <button type="button" class="btn btn-link" data-dismiss="modal">Cancelar</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        }
+     
+</body>
+</html>
+

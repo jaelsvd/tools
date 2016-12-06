@@ -1,0 +1,52 @@
+﻿@using PagedList.Mvc;
+@using PagedList;
+@model PagedList<App.Entities.Link>
+@{
+    ViewBag.Title = "Links";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+ <section>   
+<!-- Page content-->
+     <div class="content-wrapper">
+         <div class="unwrap">
+             <div style="background-image:  url('http://24.media.tumblr.com/tumblr_m2mdhdiuei1r7xfzbo1_1280.jpg')" class="img-responsive center-block">
+                 <div class="p-xl text-center text-white">
+                     <h2 class="m0">Links</h2>
+                 </div>
+             </div>
+         </div>
+
+         <div class="row">
+             <div class="col-md-12 col-sm-12">
+                 <div class="row">
+                     <hr />
+                     @foreach (var item in Model)
+                     {
+                         <div class="col-sm-6 col-md-3">
+                             <div class="panel">
+                                 <div class="item" style="height:200px;">
+                                     <a href="@item.AccessLink" target="_blank"> <img src="@Html.Raw(item.ImagePath)@Html.Raw(item.ImageName)" width="auto" max-height="100px" class="img-responsive " /></a>
+                                 </div>
+                                 <div class="p-xl text-center text-Black">
+                                     <div class="panel-body">
+                                         <div class="caption">
+                                             <h2><strong>@item.Name</strong></h2>
+                                             <em>@item.Description</em>
+                                         </div>
+                                     </div>
+                                 </div>
+                             </div>
+                         </div>
+                     }
+                 </div>
+                 <div class="col-sm-10">
+                     <div class="center-block">
+                         @Html.PagedListPager(Model, page => Url.Action("Link", new { page, pageSize = Model.PageSize }))
+                         Mostrando @Model.FirstItemOnPage a @Model.LastItemOnPage de @Model.TotalItemCount Links
+                     </div>
+                 </div>
+                 </div>
+               </div>
+            </div>
+</section>
+

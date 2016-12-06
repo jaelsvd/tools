@@ -1,0 +1,82 @@
+﻿@model App.ViewModels.LinkViewModel
+
+@{
+    ViewBag.Title = "Modificar Link";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+<!-- Main section-->
+<section>
+    <!-- Page content-->
+    <div class="content-wrapper">
+        <div class="content-heading">
+            Modificar Link
+        </div>
+        <div class="row">
+            <!-- Article Content-->
+            <div class="col-lg-7">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+
+                        @using (Html.BeginForm("EditLink", "Link", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+                        {
+                            @Html.AntiForgeryToken()
+
+                            <div class="form-horizontal">
+                                @Html.ValidationSummary(true)
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        @Html.TextBoxFor(model => model.LinkToUpdate.Name, htmlAttributes: new { @class = "mb-lg form-control input-lg", type = "text", name = "article-title", placeholder = "Favor de insertar Nombre..." })
+                                        @Html.ValidationMessageFor(model => model.LinkToUpdate.Name)
+                                        @Html.TextBoxFor(model => model.LinkToUpdate.Id, htmlAttributes: new { type = "hidden" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        @Html.TextBoxFor(model => model.LinkToUpdate.Description, htmlAttributes: new { @class = "mb-lg form-control input-lg", type = "text", name = "article-title", placeholder = "Favor de insertar una Descripción..." })
+                                        @Html.ValidationMessageFor(model => model.LinkToUpdate.Description)
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        @Html.TextBoxFor(model => model.LinkToUpdate.AccessLink, htmlAttributes: new { @class = "mb-lg form-control input-lg", type = "url", name = "article-title", placeholder = "Favor de insertar URL..." })
+                                        @Html.ValidationMessageFor(model => model.LinkToUpdate.AccessLink)
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        @Html.LabelFor(model => model.LinkToUpdate.IsFrequent, htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="col-md-12">
+                                            @Html.CheckBoxFor(model => model.LinkToUpdate.IsFrequent, htmlAttributes: new { type = "checkbox" })
+                                            @Html.ValidationMessageFor(model => model.LinkToUpdate.IsFrequent, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-8" file-div>
+                                        <img id="preview" src="@Html.Raw(Model.LinkToUpdate.ImagePath)@Html.Raw(Model.LinkToUpdate.ImageName)" />
+                                        @Html.TextBoxFor(model => model.ImageUpload, htmlAttributes: new { @class = "form-control file-input", type = "file", onchange = "fileSelected();", name = "image_file", id = "image_file" })
+                                        @Html.TextBoxFor(model => model.LinkToUpdate.ImagePath, htmlAttributes: new { type = "hidden" })
+                                        @Html.TextBoxFor(model => model.LinkToUpdate.ImageName, htmlAttributes: new { type = "hidden" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-offset-8 col-md-10">
+                                        @Html.ActionLink("Cancelar", "ListLinks")
+                                        <input type="submit" value="Guardar Cambios" class="btn btn-info" />
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                    <div class="panel-footer">
+                        @Html.ActionLink("Volver a la Lista", "ListLinks")
+                    </div>
+
+                    @section Scripts {
+                        @Scripts.Render("~/bundles/jqueryval")
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

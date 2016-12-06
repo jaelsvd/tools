@@ -1,0 +1,66 @@
+﻿@using PagedList.Mvc;
+@using PagedList;
+@model PagedList<App.Entities.Event>
+@{
+    ViewBag.Title = "Events";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+
+<!-- Main section-->
+<section>
+    <!-- Page content-->
+    <div class="content-wrapper">
+        <div class="unwrap">
+            <div style="background-image: url('http://science-all.com/images/wallpapers/wallpaper-universe/wallpaper-universe-24.jpg')" class="bg-cover">
+                <div class="p-xl text-center text-white">
+                    <h2 class="m0">Eventos</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">           
+            <div class="col-md-12 col-sm-12">
+                <div class="row">
+                    <hr />
+                    @foreach (var item in Model)
+                    {
+                        <div class="col-md-4 col-sm-6">
+                            <div class="col-lg-12">
+                                <div class="panel">
+                                    <div class="item" style="height: 200px;">
+                                        <a href="@Url.Action("EventDetail","Event",new {id = item.Id})"> <img src="@Html.Raw(item.ImagePath)@Html.Raw(item.ImageName)" class="img-responsive center-block" /></a>
+                                    </div>
+                                    <div class="panel-body">
+                                        <p class="clearfix">
+                                            <span>
+                                                <small class="mr-sm">
+                                                    Agregado el @Html.Raw(string.Format("{0:dd/MMM/yyyy}", item.CreateDate))
+                                                </small>
+                                            </span>
+                                        </p>
+                                        <div class="caption">
+                                            <a href="@Url.Action("EventDetail","Event",new {id = item.Id})">
+                                                <h4>@item.Title</h4>
+                                            </a>
+                                        </div>
+                                        <div class="truncate-string">
+                                            <p>@Html.Raw(item.Body)</p>
+                                        </div>
+                                        <div class="pull-right">
+                                            <em><a href="@Url.Action("EventDetail","Event",new {id = item.Id})">Ver mas...</a></em>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    </div>
+                  <div class="col-sm-10">
+                    <div class="center-block">
+                        @Html.PagedListPager(Model, page => Url.Action("Event", new { page, pageSize = Model.PageSize }))
+                        Mostrando @Model.FirstItemOnPage a @Model.LastItemOnPage de @Model.TotalItemCount Eventos
+                    </div>
+                </div>
+             </div>
+         </div>
+    </div>
+</section>

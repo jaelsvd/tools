@@ -1,0 +1,86 @@
+﻿@model App.ViewModels.LoginViewModel
+
+@{
+    Layout = null;
+    ViewBag.Title = "Login";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Login</title>
+    <!-- =============== VENDOR STYLES ===============-->
+    <!-- FONT AWESOME-->
+    @Styles.Render("~/vendor/fontawesome/css/font-awesome.min.css")
+    <!-- SIMPLE LINE ICONS-->
+    @Styles.Render("~/vendor/simple-line-icons/css/simple-line-icons.css")
+    <!-- =============== BOOTSTRAP STYLES ===============-->
+    @Styles.Render("~/Content/bootstrap.css")
+    <!-- =============== APP STYLES ===============-->
+    @Styles.Render("~/Content/app.css")
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="block-center mt-xl wd-xl">
+            <!-- START panel-->
+            <div class="panel panel-dark panel-flat">
+                <div class="panel-heading text-center">
+                    <a href="#">
+                        <img src="~/Images/mindWhite.png" width="85px" alt="Image" class="block-center img-rounded">
+                    </a>
+                </div>
+                <div class="panel-body">
+                    <p class="text-center pv">INICIE SESION PARA CONTINUAR.</p>
+
+                    @using (Html.BeginForm("Login", "Login", FormMethod.Post, new { @class = "mb-lg", role = "form" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group has-feedback">
+                            @Html.TextBoxFor(model => model.Email, htmlAttributes: new { @class = "form-control", id = "exampleInputEmail1", type = "email", placeholder = "Ingrese correo", autocomplete = "on", required = "required" })
+                            <span class="fa fa-envelope form-control-feedback text-muted"></span>
+                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group has-feedback">
+                            @Html.TextBoxFor(model => model.Password, htmlAttributes: new { @class = "form-control", id = "exampleInputPassword1", type = "password", placeholder = "Contraseña", required = "required" })
+                            <span class="fa fa-lock form-control-feedback text-muted"></span>
+                            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="clearfix">
+                            <div class="checkbox pull-left mt0">
+                                <label>
+                                    @Html.EditorFor(model => model.isAdmin, new { htmlAttributes = new { type = "checkbox" }})
+                                    <span class="fa"></span>Administrador
+                                </label>
+                            </div>
+                        </div>
+                        <div class="pull-right">
+                            <a href="http://tools.arkusnexus.com/pins/recover" class="text-muted">¿Olvido contraseña?</a>
+                        </div>
+                        <button type="submit" class="btn btn-block btn-primary mt-lg">Iniciar Sesion</button>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- =============== VENDOR SCRIPTS ===============-->
+    <!-- MODERNIZR-->
+    @Scripts.Render("~/vendor/modernizr/modernizr.custom.js")
+    <!-- JQUERY-->
+    @Scripts.Render("~/Scripts/jquery-2.2.1.js")
+    <!-- BOOTSTRAP-->
+    @Scripts.Render("~/Scripts/bootstrap.js")
+    <!-- STORAGE API-->
+    @Scripts.Render("~/vendor/jQuery-Storage-API/jquery.storageapi.js")
+    <!-- PARSLEY-->
+    @Scripts.Render("~/vendor/parsleyjs/dist/parsley.min.js")
+    <!-- =============== APP SCRIPTS ===============-->
+    @Scripts.Render("~/Scripts/app.js")
+</body>
+
+</html>
+

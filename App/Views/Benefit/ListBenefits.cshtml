@@ -1,0 +1,60 @@
+﻿@model IEnumerable<App.Entities.Benefit>
+
+@{
+    ViewBag.Title = "Listado de Beneficios";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+<!-- Main section-->
+<section>
+    <!-- Page content-->
+    <div class="content-wrapper">
+        <div class="content-heading">
+            Lista de Beneficios
+        </div>
+        <div class="row">
+            <!-- Article Content-->
+            <div class="col-lg-9">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <button type="button" class="btn btn-oval btn-default">@Html.ActionLink("Crear Nuevo Beneficio", "CreateBenefit", "Benefit")</button>
+                    </div>
+                    <div class="panel-body">
+                        <table class="display grid-data" cellspacing="0" width="100%">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.Title)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.CreateDate)
+                                    </th>
+                                    <th>
+                                        Acciones
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Title)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.CreateDate)
+                                        </td>
+                                        <td>
+                                            @Html.ActionLink("Editar", "UpdateBenefit", new { id = item.Id }) |
+                                            <a class="link" data-target="#myModal" style="cursor:pointer;" data-toggle="modal" benefit-id="@item.Id" m-title="Delete Benefit" isdelete="1" onclick="addDeleteUrlBenefit(this);">Eliminar</a>
+                                        </td>
+                                    </tr>
+
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

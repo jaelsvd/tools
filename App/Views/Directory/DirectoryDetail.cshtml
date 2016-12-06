@@ -1,0 +1,84 @@
+﻿@model App.Entities.User
+
+@{
+    ViewBag.Title = "DirectoryDetail";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+
+@*<!-- Main section-->
+    <section>
+        <!-- Page content-->
+        <div class="content-wrapper">
+            <div class="content-heading">
+                Detalles de @Html.DisplayFor(model => model.Names)
+            </div>*@
+<!-- Main section-->
+<section>
+    <!-- Page content-->
+    <div class="content-wrapper">
+        <div class="unwrap">
+            <div style="background-image: url('../../Images/1.Mind-HomePage.jpg')" class="bg-cover">
+                <div class="p-xl text-center text-white">
+                    <img src="~/Images/User1.png" alt="Image" class="img-thumbnail img-circle thumb128">
+                    <h3 class="m0">
+                    @Html.DisplayFor(model => model.Names)
+                    @Html.DisplayFor(model => model.LastNames)</h3>
+                    <p>@Html.DisplayFor(model => model.Position)</p>
+                    <em class="icon-present"> </em>@Html.Raw(string.Format("{0:dd/MMM/yyyy}", Model.BirthDate))
+                </div>
+            </div>
+            <div class="text-center bg-gray-dark p-lg mb-xl">
+                <div class="row row-table">
+                    @if (Model.Email == null)
+                    {
+                        <div class="col-xs-4">
+                            <h3 class="m0">Correo no dispoinible</h3>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="col-xs-4 br">
+                            <h3 class="m0">@Html.DisplayFor(model => model.Email)</h3>
+                            <p class="m0">
+                                <span class="hidden-xs">Correo</span>
+                            </p>
+                        </div>
+                    }
+                    @if (Model.TeamName == null)
+                    {
+                        <div class="col-xs-4">
+                            <h3 class="m0">Nombre de equipo no dispoinible</h3>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="col-xs-4 br">
+                            <h3 class="m0">@Html.DisplayFor(model => model.TeamName)</h3>
+                            <p class="m0">Nombre de Equipo</p>
+                        </div>
+                    }                  
+                    @if (Model.Extension == null)
+                    {
+                        <div class="col-xs-4">
+                            <h3 class="m0">Extensión no dispoinible</h3>
+                        </div>
+                    }
+                    else
+                    { 
+                    <div class="col-xs-4">
+                        <h3 class="m0">@Html.DisplayFor(model => model.Extension)</h3>
+                        <p class="m0">Extensión</p>
+                    </div>
+                    }
+                </div>
+            </div>
+            <!-- Standard button with label -->
+            <button type="button" class="btn btn-labeled btn-default">
+                <span class="btn-label">
+                    <i class="fa fa-arrow-left"></i>                   
+                </span>
+                @Html.ActionLink("Volver al Directorio", "Directory", "Directory")
+            </button>
+                    </div>
+                </div>
+</section>

@@ -1,0 +1,72 @@
+﻿@model IEnumerable<App.Entities.User>
+
+@{
+    ViewBag.Title = "Directory";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+
+    <!-- Main section-->
+    <section>
+        <!-- Page content-->
+        <div class="content-wrapper">
+            <div class="unwrap">
+                <div style="background-image: url('http://www.timbena.com/i/universe-tumblr-photo-wallpapers.jpg')" class="bg-cover">
+                    <div class="p-xl text-center text-white">
+                        <h2 class="m0">Directorio</h2>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <hr />
+                <div class="col-md-12 col-sm-12">
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">Directorio de Colaboradores</div>
+                                <div class="table-responsive">
+                                    <table class="display grid-data">
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    Nombre y apellido
+                                                </th>
+                                                <th>
+                                                    Correo
+                                                </th>
+                                                <th>
+                                                    Detalles
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in Model)
+                                            {
+                                                if (item.Status)
+                                                {
+                                                    <tr>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.Names)
+                                                            @Html.DisplayFor(modelItem => item.LastNames)
+
+
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.Email)
+                                                        </td>
+                                                        <td>
+                                                            @Html.ActionLink("Detalles", "DirectoryDetail", item)
+                                                        </td>
+                                                    </tr>
+                                                }
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>

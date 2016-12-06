@@ -1,0 +1,63 @@
+﻿@model App.ViewModels.PolicyViewModel
+
+@{
+    ViewBag.Title = "Crear Políticas";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+    <!-- Main section-->
+    <section>
+        <!-- Page content-->
+        <div class="content-wrapper">
+            <div class="content-heading">
+                Normas y Procesos
+            </div>
+            <div class="row">
+                <!-- Article Content-->
+                <div class="col-lg-9">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            @using (Html.BeginForm("CreatePolicy", "Policy", FormMethod.Post, new { @class = "from-horizontal", role = "from", enctype = "multipart/form-data" }))
+                            {
+                                @Html.AntiForgeryToken()
+
+                                <div class="form-horizontal">
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                    <div class="form-group">
+                                        <div class="col-md-12">
+                                            @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "mb-lg form-control input-lg", type = "text", name = "article-title", placeholder = "Favor de insertar título..." } })
+                                            @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="col-md-12">
+                                            @Html.TextAreaFor(model => model.Body, htmlAttributes: new { @class = "form-control jqte-test"})
+                                            @Html.ValidationMessageFor(model => model.Body, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-8" file-div>
+                                            <img id="preview" src="~/Images/image.png" />
+                                            @Html.TextBoxFor(model => model.ImageUpload, htmlAttributes: new { @class = "form-control file-input", type = "file", onchange = "fileSelected();", name = "image_file", id = "image_file" })
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="form-group">
+                                        <div class="col-md-offset-10 col-md-10">
+                                            @Html.ActionLink("Cancelar", "CreatePolicy")
+                                            <input type="submit" value="Crear" class="btn btn-info" />
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                            </div>
+                            <div class="panel-footer">
+                                <button type="button" class="btn btn-oval btn-default"> @Html.ActionLink("Volver a la Lista", "ListPolicy")</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </section>

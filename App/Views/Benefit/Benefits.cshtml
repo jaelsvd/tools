@@ -1,0 +1,54 @@
+﻿@using PagedList.Mvc;
+@using PagedList;
+@model PagedList<App.Entities.Benefit>
+@{
+    ViewBag.Title = "Benefits";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+<section>
+    <!-- Page content-->
+
+    <div class="content-wrapper">
+        <div class="unwrap">
+            <div style="background-image: url('https://i.ytimg.com/vi/uSJSPRQdLd8/maxresdefault.jpg')" class="bg-cover">
+                <div class="p-xl text-center text-white">
+                    <h2 class="m0">Beneficios</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="row">
+                    <hr />
+                    @foreach (var item in Model)
+                    {
+                        <div class="col-lg-4">
+                            <div class="col-lg-12">
+                                <div class="panel">
+                                    <div class="item" style="height:200px;">
+                                        <a href="@Url.Action("BenefitDetail","Benefit",new {id = item.Id})"> <img src="@Html.Raw(item.ImagePath)@Html.Raw(item.ImageName)" class="img-responsive " /></a>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="caption text-center">
+                                            <h4>
+                                                <a href="@Url.Action("BenefitDetail","Benefit",new {id = item.Id})">
+                                                    @item.Title
+                                                </a>
+                                            </h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+                <div class="col-sm-10">
+                    <div class="center-block">
+                        @Html.PagedListPager(Model, page => Url.Action("Benefit", new { page, pageSize = Model.PageSize }))
+                        Mostrando @Model.FirstItemOnPage a @Model.LastItemOnPage de @Model.TotalItemCount Beneficios
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

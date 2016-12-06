@@ -1,0 +1,78 @@
+﻿@model IEnumerable<App.Entities.Event>
+
+@{
+    ViewBag.Title = "ListEvents";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+
+<!-- Main section-->
+<section>
+    <!-- Page content-->
+    <div class="content-wrapper">
+        <div class="content-heading">
+            Listado de Eventos
+        </div>
+        <div class="row">
+            <!-- Article Content-->
+            <div class="col-md-8 col-sm-8">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <button type="button" class="btn btn-oval btn-default">@Html.ActionLink("Crear Nuevo Evento", "CreateEvent", "Event")</button>
+                    </div>
+                    <div class="panel-body">
+                        <table class="display grid-data" cellspacing="0" width="100%">
+                            <thead>
+                                <tr>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.Title)
+                                    </td>
+                                    <td>
+                                        Categoría
+                                    </td>
+                                    <td>
+                                        @Html.DisplayNameFor(model => model.EventDate)
+                                    </td>
+                                    <td align="right">
+                                        Acciones
+                                    </td>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Title)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Category.Name)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.EventDate)
+                                        </td>
+                                        <td align="right">
+                                            @Html.ActionLink("Editar", "UpdateEvent", new { id = item.Id }) |
+                                            <a class="link" data-target="#myModal" style="cursor:pointer;" data-toggle="modal" event-id="@item.Id" m-title="Delete Event" isdelete="1" onclick="addDeleteUrlEvent(this);">Eliminar</a>                                        
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="col-md-3 col-sm-3">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <div class="lead">
+                            <button type="button" class="btn btn-oval btn-default">@Html.ActionLink("Ir a Lista de Categoria de Eventos", "ListCategories", "EventCategory")</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

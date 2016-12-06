@@ -1,0 +1,298 @@
+﻿@model App.ViewModels.AdminDashboardViewModel
+    @{
+        ViewBag.Title = "Dashboard";
+        Layout = "~/Views/Shared/_Layout2.cshtml";
+    }
+    <!-- Main section-->
+    <section>
+    <!-- Page content-->
+    <div class="content-wrapper">
+        <div class="content-heading">
+            Dashboard
+            <small data-localize="dashboard.WELCOME"></small>
+        </div>
+            <div class="row">
+            <div class="col-md-6 col-sm-6">
+                <!-- News -->
+                @if (Model.News.Any())
+                {
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div id="panelDemo10" class="panel panel-info">
+                                <div class="panel-heading">
+                                    <em class="icon-book-open"> </em>
+                                    <button type="button" class="btn btn-oval btn-default">@Html.ActionLink("Crear Nueva Noticia", "CreateNews", "News")</button>
+                                </div>
+
+                                <div class="panel-body">
+                                    <p class="lead">Noticias</p>
+                                    <hr />
+                                    <table class="display grid-data" cellspacing="0" width="100%">
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    Titulo
+                                                </th>
+                                                <th>
+                                                    Importante
+                                                </th>
+                                                <th>
+                                                    Fecha
+                                                </th>
+
+                                                <th>
+                                                    Acciones
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                            @foreach (var item in Model.News)
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.Title)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.IsImportant)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.CreateDate)
+                                                    </td>
+                                                    <td>
+                                                        @Html.ActionLink("Editar", "UpdateNews", "News", new { id = item.Id }, null) |
+                                                        <a class="link" data-target="#myModal" style="cursor:pointer;" data-toggle="modal" news-id="@item.Id" m-title="Delete News" isdelete="1" onclick="addDeleteUrlNews(this); ">Eliminar</a>
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+                <!-- Policy -->
+                @if(Model.Policy.Any())
+                { 
+                <div class="row">
+                    <div class="col-lg-12">
+                        <!-- START panel-->
+                        <div id="panelDemo10" class="panel panel-info">
+                            <div class="panel-heading">
+                                <em class="icon-people"> </em>
+                                <button type="button" class="btn btn-oval btn-default">@Html.ActionLink("Crear Nueva Norma y Proceso", "CreatePolicy", "Policy")</button>
+                            </div>
+                            <div class="panel-body">
+                                <p class="lead">Normas y Procesos</p>
+                                <hr />
+                                <table class="display grid-data" cellpadding="0" width="100%">
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                Título
+                                            </th>
+
+                                            <th>
+                                                Fecha
+                                            </th>
+                                            <th>
+                                                Acciones
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        @foreach (var item in Model.Policy)
+                                        {
+                                            <tr>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Title)
+                                                </td>
+
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Date)
+                                                </td>
+                                                <td>
+                                                    @Html.ActionLink("Editar", "UpdatePolicy","Policy", new { id = item.Id }, null) |
+                                                    <a class="link" data-target="#myModal" style="cursor:pointer;" data-toggle="modal" policy-id="@item.Id" m-title="Delete Policy" isdelete="1" onclick="addDeleteUrlPolicy(this); ">Eliminar</a>
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- END panel-->
+                    </div>
+                </div>
+                }
+                <!-- LINKS panel-->
+                @if(Model.Link.Any())
+                { 
+                <div class="row">
+                    <div class="col-lg-12">
+                        <!-- START panel-->
+                        <div id="panelDemo10" class="panel panel-info">
+                            <div class="panel-heading">
+                                <em class="icon-link"> </em>
+                                <button type="button" class="btn btn-oval btn-default">@Html.ActionLink("Crear Nuevo Link", "CreateLink", "Link")</button>
+                            </div>
+                            <div class="panel-body">
+                                <p class="lead">Links</p>
+                                <hr />
+                                <table class="display grid-data" cellpadding="0" width="100%">
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                Nombre
+                                            </th>
+
+                                            <th>
+                                                URL
+                                            </th>
+                                            <th>
+                                                Acciones
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        @foreach (var item in Model.Link)
+                                        {
+                                            <tr>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Name)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.AccessLink)
+                                                </td>
+                                                <td>
+                                                    @Html.ActionLink("Editar", "UpdateLink", "Link", new { id = item.Id }, null) |
+                                                    <a class="link" data-target="#myModal" style="cursor:pointer;" data-toggle="modal" link-id="@item.Id" m-title="Delete Link" isdelete="1" onclick="addDeleteUrl(this); ">Eliminar</a>
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                }
+             </div>
+                <div class="col-md-6 col-sm-6">
+                    <!-- Benefit -->
+                    @if(Model.Benefit.Any())
+                    { 
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12">
+                            <div id="panelDemo10" class="panel panel-info">
+                                <div class="panel-heading"><em class="icon-emotsmile"></em>
+                                      <button type="button" class="btn btn-oval btn-default">@Html.ActionLink("Crear Nuevo Beneficio", "CreateBenefit", "Benefit")</button> 
+                                 </div>
+                                <div class="panel-body">
+                                    <p class="lead">Beneficios</p>
+                                    <hr />
+                                    <table class="display grid-data" cellspacing="0" width="100%">
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    Título
+                                                </th>
+                                                <th>
+                                                    Fecha
+                                                </th>
+
+                                                <th>
+                                                    Acciones
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                            @foreach (var item in Model.Benefit)
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.Title)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.CreateDate)
+                                                    </td>
+                                                    <td>
+                                                        @Html.ActionLink("Editar", "UpdateBenefit","Benefit", new { id = item.Id }, null)  |
+                                                        <a class="link" data-target="#myModal" style="cursor:pointer;" data-toggle="modal" benefit-id="@item.Id" m-title="Delete Benefit" isdelete="1" onclick="addDeleteUrlBenefit(this); ">Eliminar</a>
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                     </div>
+                    }
+
+                    <!-- Event-->
+                    @if (Model.Event.Any())
+                    {
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <!-- START panel-->
+                            <div id="panelDemo10" class="panel panel-info">
+                                <div class="panel-heading"><em class="icon-game-controller"> </em>
+                                    <button type="button" class="btn btn-oval btn-default">@Html.ActionLink("Crear Nuevo Evento", "CreateEvent", "Event")</button>
+                                </div>
+                                <div class="panel-body">
+                                    <p class="lead">Eventos</p>
+                                    <hr />
+                                    <table class="display grid-data" cellpadding="0" width="100%">
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    Título
+                                                </th>
+
+                                                <th>
+                                                    Fecha del Evento
+                                                </th>
+                                                <th>
+                                                    Acciones
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                            @foreach (var item in Model.Event)
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.Title)
+                                                    </td>
+
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.EventDate)
+                                                    </td>
+                                                    <td>
+                                                        @Html.ActionLink("Editar", "UpdateEvent", "Event", new { id = item.Id }, null) |
+                                                        <a class="link" data-target="#myModal" style="cursor:pointer;" data-toggle="modal" event-id="@item.Id" m-title="Delete Event" isdelete="1" onclick="addDeleteUrlEvent(this); ">Eliminar</a>
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    }
+                </div>
+                    
+
+            </div>
+            <!-- END First Rown-->
+        </div>
+</section>

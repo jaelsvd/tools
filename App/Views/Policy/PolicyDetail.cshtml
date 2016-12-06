@@ -1,0 +1,43 @@
+﻿@model App.Entities.Policy
+@{
+    ViewBag.Title = "PolicyDetail";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+<!-- Main section-->
+<section>
+    <!-- Page content-->
+    <div class="content-wrapper">
+        <div class="row">
+            <!-- Blog Content-->
+            <div class="col-md-12 col-sm-12">
+                <div class="panel panel-group">
+                    <div class="panel-heading">
+                        <div class="bb">
+                            <h2 class="text-lg">@Model.Title </h2>
+                        </div>
+
+                        <p class="clearfix">
+                            <span class="pull-left">
+                                <small class="mr-sm">
+                                    By <a href="http://arkusnexus.com">ArkusNexus</a>
+                                </small>
+                                <small class="mr-sm">Creado @Html.Raw(string.Format("{0:dd/MMM/yyyy}", Model.Date))</small>
+                            </span>
+                        </p>
+                    </div>
+                    <div class="panel-body text-md">
+                        <p align="center">
+                            <img src="@Html.Raw(Model.ImagePath)@Html.Raw(Model.ImageName)" class="img-thumbnail" width="350px" max-height="350" />
+                        </p>
+                        <hr />
+                        <p>
+                            @Html.Raw(Model.Body)
+                        </p>
+
+
+                    </div>
+                </div>
+            </div>          
+        </div>
+    </div>
+</section>

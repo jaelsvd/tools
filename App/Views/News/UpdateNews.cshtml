@@ -1,0 +1,74 @@
+﻿@model App.ViewModels.NewsViewModel
+
+@{
+    ViewBag.Title = "Modificar Noticia";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+<!-- Main section-->
+<section>
+    <!-- Page content-->
+    <div class="content-wrapper">
+        <div class="content-heading">
+            Modificar Noticia
+        </div>
+
+        <div class="row">
+            <!-- Article Content-->
+            <div class="col-lg-9">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        @using (Html.BeginForm("EditNews", "News", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+                        {
+                            @Html.AntiForgeryToken()
+
+                            <div class="form-horizontal">
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        @Html.TextBoxFor(model => model.NewsToUpdate.Title, htmlAttributes: new { @class = "mb-lg form-control input-lg", type = "text", name = "article-title", placeholder = "Favor de insertar título..." })
+                                        @Html.ValidationMessageFor(model => model.NewsToUpdate.Title, "", new { @class = "text-danger" })
+                                        @Html.TextBoxFor(model => model.NewsToUpdate.Id, htmlAttributes: new { type = "hidden" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    @Html.TextAreaFor(model => model.NewsToUpdate.Body, htmlAttributes: new { @class = "mb-lg form-control input-lg jqte-test" })
+                                    @Html.ValidationMessageFor(model => model.NewsToUpdate.Body, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-6">
+                                    @Html.LabelFor(model => model.NewsToUpdate.IsImportant, htmlAttributes: new { @class = "control-label col-md-2" })
+                                    <div class="col-md-12">
+                                        @Html.CheckBoxFor(model => model.NewsToUpdate.IsImportant, htmlAttributes: new { type = "checkbox" })
+                                        @Html.ValidationMessageFor(model => model.NewsToUpdate.IsImportant, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-8" file-div>
+                                    <img id="preview" src="@Html.Raw(Model.NewsToUpdate.ImagePath)@Html.Raw(Model.NewsToUpdate.ImageName)" />
+                                    @Html.TextBoxFor(model => model.ImageUpload, htmlAttributes: new { @class = "form-control file-input", type = "file", onchange = "fileSelected();", name = "image_file", id = "image_file" })
+                                    @Html.TextBoxFor(model => model.NewsToUpdate.ImagePath, htmlAttributes: new { type = "hidden" })
+                                    @Html.TextBoxFor(model => model.NewsToUpdate.ImageName, htmlAttributes: new { type = "hidden" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-offset-10 col-md-10">
+                                    <input type="submit" value="Guardar" class="btn btn-primary" />
+                                </div>
+                            </div>
+                        }
+                        <div>
+                            </div>
+                    </div>
+
+                    <div class="panel-footer">
+                        @Html.ActionLink("Volver a la Lista", "ListNews")
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

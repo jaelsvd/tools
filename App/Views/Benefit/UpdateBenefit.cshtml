@@ -1,0 +1,68 @@
+﻿@model App.ViewModels.BenefitViewModel
+@{
+    ViewBag.Title = "Modificar Beneficio";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+<!-- Main section-->
+<section>
+    <!-- Page content-->
+    <div class="content-wrapper">
+        <div class="content-heading">
+            Modificar Beneficio
+        </div>
+
+        <div class="row">
+            <!-- Article Content-->
+            <div class="col-lg-9">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        @using (Html.BeginForm("EditBenefit", "Benefit", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+                        {
+
+                            @Html.AntiForgeryToken()
+
+                            <div class="form-horizontal">
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        @Html.TextBoxFor(model => model.BenefitToUpdate.Title, htmlAttributes: new { @class = "mb-lg form-control input-lg", type = "text", name = "article-title", placeholder = "Favor de insertar título..." })
+                                        @Html.ValidationMessageFor(model => model.BenefitToUpdate.Title, "", new { @class = "text-danger" })
+                                        @Html.TextBoxFor(model => model.BenefitToUpdate.Id, htmlAttributes: new { type = "hidden" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        @Html.TextAreaFor(model => model.BenefitToUpdate.Body, htmlAttributes: new { @class = "form-control jqte-test" })
+                                        @Html.ValidationMessageFor(model => model.BenefitToUpdate.Body, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-md-8" file-div>
+                                        <img id="preview" src="@Html.Raw(Model.BenefitToUpdate.ImagePath)@Html.Raw(Model.BenefitToUpdate.ImageName)" />
+                                        @Html.TextBoxFor(model => model.ImageUpload, htmlAttributes: new { @class = "form-control file-input", type = "file", onchange = "fileSelected();", name = "image_file", id = "image_file" })
+                                        @Html.TextBoxFor(model => model.BenefitToUpdate.ImagePath, htmlAttributes: new { type = "hidden" })
+                                        @Html.TextBoxFor(model => model.BenefitToUpdate.ImageName, htmlAttributes: new { type = "hidden" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-offset-9 col-sm-10">
+                                        @Html.ActionLink("Cancelar", "ListBenefits")
+                                        <input type="submit" value="Guardar Cambios" class="btn btn-info" />
+                                    </div>
+                                </div>
+                            </div>
+
+                        }
+                    </div>
+                    <div class="panel-footer"> @Html.ActionLink("Volver a la Lista", "ListBenefits")</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
